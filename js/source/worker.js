@@ -44,7 +44,7 @@ util.extend(Worker.prototype, {
 
         function done(err, data) {
             delete this.loading[source][uid];
-
+            if (err && err.message === 'Not Found') return callback();
             if (err) return callback(err);
 
             tile.data = new vt.VectorTile(new Protobuf(new Uint8Array(data)));
